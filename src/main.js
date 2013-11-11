@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     });
     $("#fbLogout").on("click", function() {
-        FB.logout(null, { perms: 'user_hometown, user_location, friend_hometown, friend_location' } );
+        FB.logout(null);
     });
 });
 
