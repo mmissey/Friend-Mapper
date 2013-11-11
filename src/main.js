@@ -12,13 +12,8 @@ $(document).ready(function() {
     $("#fbLogout").on("click", function() {
         FB.logout();
     });
-    var time = new Date().getTime();
-    $.get('json/cities.json?time=' + time).success(function(data) {
-        cities = data;
-    });
 });
 
-var cities = {};
 var user = {};
 var pathCoords = [];
 var projection = null;
@@ -81,81 +76,32 @@ var tweenDash = function tweenDash() {
 function mapFriends(data) {
     var total = 0;
     var svg = d3.select('svg');
-    var new_cities = {};
     var cityQueue = 0;
 
     $.each(data, function(index, value) {
-        if (value.current_location && value.hometown_location && (value.current_location.name !== value.hometown_location.name) ) {
+        var curr = value.current_location;
+        var home = value.hometown_location;
+        if (value.current_location && value.hometown_location && (value.current_location.name !== value.hometown_location.name)) {
             total++;
-            var curr = '';
-            var home = '';
-            var currPoints = 0;
-            var homePoints = 0;
-            var currPromise = true;
-            var homePromise = true;
-
-            curr = value.current_location.name;
-            home = value.hometown_location.name;
-            if (!cities[curr]) {
-                cities[curr] = "waiting";
-                cityQueue++;
-                currPromise = getCoordinates(curr); //get lat,long
+            
+            var currPoints = projection([curr["longitude"], curr["latitude"]]);
+            var homePoints = projection([home["longitude"], home["latitude"]]);
+            if (currPoints && homePoints) {
+                placePath({ //Creates the circles and path
+                    x1: homePoints[0],
+                    y1: homePoints[1],
+                    x2: currPoints[0],
+                    y2: currPoints[1],
+                    from: home,
+                    to: curr,
+                    name: value.name,
+                    uid: value.uid
+                });
             }
-            if (!cities[home]) {
-                cities[home] = "waiting";
-                cityQueue++;
-                homePromise = getCoordinates(home);
-
-            }
-            $.when(currPromise, homePromise).done(function(a1, a2) {
-                currPoints = projection([cities[curr].long, cities[curr].lat]);
-                homePoints = projection([cities[home].long, cities[home].lat]);
-                if (currPoints && homePoints) {
-                    placePath({ //Creates the circles and path
-                        x1: homePoints[0],
-                        y1: homePoints[1],
-                        x2: currPoints[0],
-                        y2: currPoints[1],
-                        from: home,
-                        to: curr,
-                        name: value.name,
-                        uid: value.uid
-                    });
-                }
-            });
         }
     });
 
     $('#pathCount').text(total);
-
-    function getCoordinates(city) {
-        var api_key = "Fmjtd%7Cluubn9612u%2C2x%3Do5-907gq0";
-        var url = "http://www.mapquestapi.com/geocoding/v1/address?key=" + api_key + "&location=" + encodeURIComponent(city);
-        // var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(city) + "&sensor=false";
-        return $.get(url).success(function(rsp) {
-            //MAPQUEST
-            new_cities[city] = cities[city] = {
-                lat: rsp.results[0].locations[0].latLng["lat"],
-                long: rsp.results[0].locations[0].latLng["lng"]
-            }
-            cityQueue--;
-            if(cityQueue === 0 && (Object.keys(new_cities).length > 0)){
-                $.post('cityCoordinates.php', {
-                    newCities: new_cities
-                }).success(function(){
-                    console.log("Thanks for adding " + Object.keys(new_cities).length + " cities!");
-                });
-            }
-            //GOOGLE
-            // if(rsp.status !== "OVER_QUERY_LIMIT"){
-            //     cities[city] = {
-            //         lat: rsp.results[0].geometry.location["lat"],
-            //         long: rsp.results[0].geometry.location["lng"]
-            //     }
-            // }
-        });
-
-    }
 
 }
 
@@ -269,7 +215,7 @@ var drawMap = function() {
     function clicked(d) {
         console.log(d);
     }
-    
+
     function zoomed(d) {
         var x, y;
         var diff = [];
