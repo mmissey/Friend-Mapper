@@ -1,0 +1,658 @@
+{
+    "San Francisco, California": {
+        "lat": 37.777119,
+        "long": -122.41964
+    },
+    "Spokane, Washington": {
+        "lat": 47.657261,
+        "long": -117.412277
+    },
+    "Daly City, California": {
+        "lat": 37.691078,
+        "long": -122.473351
+    },
+    "Los Angeles, California": {
+        "lat": 34.05349,
+        "long": -118.245323
+    },
+    "Columbia, Maryland": {
+        "lat": 39.20916,
+        "long": -76.86731
+    },
+    "Salem, Oregon": {
+        "lat": 44.933262,
+        "long": -123.043808
+    },
+    "St. Louis": {
+        "lat": 38.627739,
+        "long": -90.199509
+    },
+    "Hilliard, Ohio": {
+        "lat": 40.029812,
+        "long": -83.151047
+    },
+    "Mason, Ohio": {
+        "lat": 39.356972,
+        "long": -84.297623
+    },
+    "Cincinnati, Ohio": {
+        "lat": 39.106609,
+        "long": -84.504547
+    },
+    "St. Charles, Missouri": {
+        "lat": 38.782429,
+        "long": -90.482079
+    },
+    "Chicago, Illinois": {
+        "lat": 41.884151,
+        "long": -87.632408
+    },
+    "Portland, Oregon": {
+        "lat": 45.511791,
+        "long": -122.675629
+    },
+    "Grand Rapids, Michigan": {
+        "lat": 42.966412,
+        "long": -85.671181
+    },
+    "Webster Groves, Missouri": {
+        "lat": 38.59264,
+        "long": -90.355911
+    },
+    "Edwardsville, Illinois": {
+        "lat": 38.81337,
+        "long": -89.956802
+    },
+    "Freeburg, Illinois": {
+        "lat": 38.423119,
+        "long": -89.90905
+    },
+    "Des Moines, Iowa": {
+        "lat": 41.58979,
+        "long": -93.615662
+    },
+    "Carrollton, Illinois": {
+        "lat": 39.302151,
+        "long": -90.406807
+    },
+    "Houston, Texas": {
+        "lat": 29.76045,
+        "long": -95.369781
+    },
+    "Hyderabad, Andhra Pradesh": {
+        "lat": 17.399289,
+        "long": 78.473371
+    },
+    "Enumclaw, Washington": {
+        "lat": 47.204319,
+        "long": -121.991371
+    },
+    "Decatur, Illinois": {
+        "lat": 39.84584,
+        "long": -88.952461
+    },
+    "Springfield, Illinois": {
+        "lat": 39.801048,
+        "long": -89.6436
+    },
+    "Taylorville, Illinois": {
+        "lat": 39.552261,
+        "long": -89.292038
+    },
+    "Creve Coeur, Missouri": {
+        "lat": 38.661301,
+        "long": -90.44326
+    },
+    "Highland, Illinois": {
+        "lat": 38.73941,
+        "long": -89.677063
+    },
+    "Rochester, New York": {
+        "lat": 43.155499,
+        "long": -77.616028
+    },
+    "Overland Park, Kansas": {
+        "lat": 38.98489,
+        "long": -94.671677
+    },
+    "Florissant, Missouri": {
+        "lat": 38.791519,
+        "long": -90.322998
+    },
+    "Denver, Colorado": {
+        "lat": 39.740009,
+        "long": -104.992264
+    },
+    "Moweaqua, Illinois": {
+        "lat": 39.618309,
+        "long": -89.019638
+    },
+    "Jacksonville, North Carolina": {
+        "lat": 34.74929,
+        "long": -77.421051
+    },
+    "Black, Missouri": {
+        "lat": 37.531921,
+        "long": -90.933151
+    },
+    "White Hall, Illinois": {
+        "lat": 39.438019,
+        "long": -90.404121
+    },
+    "Columbia, Missouri": {
+        "lat": 38.952171,
+        "long": -92.334152
+    },
+    "Sainte Genevieve, Missouri": {
+        "lat": 37.978539,
+        "long": -90.047447
+    },
+    "Pasadena Hills, Missouri": {
+        "lat": 38.707939,
+        "long": -90.288612
+    },
+    "Staunton, Illinois": {
+        "lat": 39.011639,
+        "long": -89.791382
+    },
+    "Olney, Illinois": {
+        "lat": 38.730141,
+        "long": -88.094177
+    },
+    "Boulder, Colorado": {
+        "lat": 40.015739,
+        "long": -105.279243
+    },
+    "Hillsboro, Illinois": {
+        "lat": 39.16106,
+        "long": -89.494423
+    },
+    "Oakville, Missouri": {
+        "lat": 36.145771,
+        "long": -89.896698
+    },
+    "Fenton, Missouri": {
+        "lat": 38.517849,
+        "long": -90.452209
+    },
+    "Marine, Illinois": {
+        "lat": 38.789551,
+        "long": -89.778633
+    },
+    "Clifton Park, New York": {
+        "lat": 42.866951,
+        "long": -73.771782
+    },
+    "Des Peres, Missouri": {
+        "lat": 38.603432,
+        "long": -90.442688
+    },
+    "San Luis Obispo, California": {
+        "lat": 35.285519,
+        "long": -120.662521
+    },
+    "Kalamazoo, Michigan": {
+        "lat": 42.292431,
+        "long": -85.601112
+    },
+    "Rockwall, Texas": {
+        "lat": 32.931041,
+        "long": -96.460762
+    },
+    "Jacksonville, Illinois": {
+        "lat": 39.745201,
+        "long": -90.231163
+    },
+    "Minier, Illinois": {
+        "lat": 40.431889,
+        "long": -89.313339
+    },
+    "Terre Haute, Indiana": {
+        "lat": 39.466492,
+        "long": -87.413231
+    },
+    "Taipei, Taiwan": {
+        "lat": 25.037638,
+        "long": 121.564459
+    },
+    "Alexandria, Egypt": {
+        "lat": 35.867931,
+        "long": -90.944939
+    },
+    "Cape Girardeau, Missouri": {
+        "lat": 37.302711,
+        "long": -89.544533
+    },
+    "Kansas City, Missouri": {
+        "lat": 39.102951,
+        "long": -94.583061
+    },
+    "Collinsville, Illinois": {
+        "lat": 38.669529,
+        "long": -89.985832
+    },
+    "Arroyo Grande, California": {
+        "lat": 35.124191,
+        "long": -120.577171
+    },
+    "Bloomington, Illinois": {
+        "lat": 40.485008,
+        "long": -88.997711
+    },
+    "Danvers, Illinois": {
+        "lat": 40.529881,
+        "long": -89.177383
+    },
+    "Atlanta, Illinois": {
+        "lat": 40.263691,
+        "long": -89.2351
+    },
+    "Loudon, Tennessee": {
+        "lat": 35.7416,
+        "long": -84.33651
+    },
+    "Mount Zion, Illinois": {
+        "lat": 39.7808,
+        "long": -88.870537
+    },
+    "West Dundee, Illinois": {
+        "lat": 42.09758,
+        "long": -88.27858
+    },
+    "Elk Grove Village, Illinois": {
+        "lat": 42.002811,
+        "long": -88.009041
+    },
+    "Belleville, Illinois": {
+        "lat": 38.512131,
+        "long": -89.98423
+    },
+    "O'Fallon, Missouri": {
+        "lat": 38.681671,
+        "long": -90.219437
+    },
+    "Canton, Guangdong, China": {
+        "lat": 23.132191,
+        "long": 113.266531
+    },
+    "Milwaukee, Wisconsin": {
+        "lat": 43.041809,
+        "long": -87.906837
+    },
+    "Worden, Illinois": {
+        "lat": 38.93161,
+        "long": -89.840263
+    },
+    "Granite City, Illinois": {
+        "lat": 38.702148,
+        "long": -90.148132
+    },
+    "Tustin, California": {
+        "lat": 33.74332,
+        "long": -117.818817
+    },
+    "New York, New York": {
+        "lat": 40.71455,
+        "long": -74.007118
+    },
+    "Columbus, Georgia": {
+        "lat": 32.462921,
+        "long": -84.987633
+    },
+    "Alton, Illinois": {
+        "lat": 38.890862,
+        "long": -90.18383
+    },
+    "Quincy, Illinois": {
+        "lat": 39.935589,
+        "long": -91.395828
+    },
+    "Carterville, Illinois": {
+        "lat": 37.76104,
+        "long": -89.077187
+    },
+    "Nashville, Tennessee": {
+        "lat": 36.167782,
+        "long": -86.778358
+    },
+    "Irvine, California": {
+        "lat": 33.686878,
+        "long": -117.82534
+    },
+    "Hong Kong": {
+        "lat": 22.396428,
+        "long": -114.109497
+    },
+    "Nassau City, New Providence, Bahamas": {
+        "lat": 39.527596,
+        "long": -99.141968
+    },
+    "Peoria, Illinois": {
+        "lat": 40.692139,
+        "long": -89.587761
+    },
+    "Macomb, Illinois": {
+        "lat": 40.459888,
+        "long": -90.669479
+    },
+    "Pittsburgh, Pennsylvania": {
+        "lat": 40.438332,
+        "long": -79.997459
+    },
+    "Phoenix, Arizona": {
+        "lat": 33.448261,
+        "long": -112.075768
+    },
+    "Grand Blanc, Michigan": {
+        "lat": 42.92749,
+        "long": -83.630157
+    },
+    "Kuala Lumpur, Malaysia": {
+        "lat": 3.157098,
+        "long": 101.700953
+    },
+    "Calvert City, Kentucky": {
+        "lat": 37.032188,
+        "long": -88.350487
+    },
+    "Singapore, Singapore": {
+        "lat": 1.29093,
+        "long": 103.852888
+    },
+    "Champaign, Illinois": {
+        "lat": 40.114201,
+        "long": -88.2435
+    },
+    "Morton, Illinois": {
+        "lat": 40.610481,
+        "long": -89.461639
+    },
+    "San Diego, California": {
+        "lat": 32.715691,
+        "long": -117.16172
+    },
+    "Hopedale, Illinois": {
+        "lat": 40.420582,
+        "long": -89.413696
+    },
+    "Jerseyville, Illinois": {
+        "lat": 39.12059,
+        "long": -90.328239
+    },
+    "Lansing, Michigan": {
+        "lat": 42.731941,
+        "long": -84.552254
+    },
+    "Ellicott City, Maryland": {
+        "lat": 39.268719,
+        "long": -76.799438
+    },
+    "Maryville, Illinois": {
+        "lat": 38.728199,
+        "long": -89.956581
+    },
+    "Bethesda, Maryland": {
+        "lat": 38.98637,
+        "long": -77.096916
+    },
+    "Columbus, Ohio": {
+        "lat": 39.96196,
+        "long": -83.002983
+    },
+    "Cleveland, Ohio": {
+        "lat": 41.504711,
+        "long": -81.690742
+    },
+    "Affton, Missouri": {
+        "lat": 38.55024,
+        "long": -90.332718
+    },
+    "Columbia, Illinois": {
+        "lat": 38.441391,
+        "long": -90.199028
+    },
+    "Franklin, Illinois": {
+        "lat": 39.623051,
+        "long": -90.04483
+    },
+    "Fayetteville, Arkansas": {
+        "lat": 36.063202,
+        "long": -94.157913
+    },
+    "Mount Sterling, Illinois": {
+        "lat": 39.985909,
+        "long": -90.765953
+    },
+    "Naperville, Illinois": {
+        "lat": 41.770531,
+        "long": -88.153023
+    },
+    "Pana, Illinois": {
+        "lat": 39.385769,
+        "long": -89.081223
+    },
+    "Pinckneyville, Illinois": {
+        "lat": 38.08009,
+        "long": -89.381752
+    },
+    "Tacoma, Washington": {
+        "lat": 47.255131,
+        "long": -122.44165
+    },
+    "Robinson, Illinois": {
+        "lat": 39.005798,
+        "long": -87.739601
+    },
+    "Earth City, Missouri": {
+        "lat": 38.76564,
+        "long": -90.46003
+    },
+    "Queen Creek, Arizona": {
+        "lat": 33.24467,
+        "long": -111.634521
+    },
+    "Troy, Illinois": {
+        "lat": 38.72897,
+        "long": -89.882027
+    },
+    "Merced, California": {
+        "lat": 37.30127,
+        "long": -120.486198
+    },
+    "Arnold, Missouri": {
+        "lat": 38.423382,
+        "long": -90.375221
+    },
+    "Charlotte, North Carolina": {
+        "lat": 35.2225,
+        "long": -80.83754
+    },
+    "Wildwood, Missouri": {
+        "lat": 38.576118,
+        "long": -90.636642
+    },
+    "Chesterfield, Missouri": {
+        "lat": 38.653629,
+        "long": -90.553513
+    },
+    "Brentwood, Missouri": {
+        "lat": 38.61821,
+        "long": -90.34848
+    },
+    "Kasala, Kassalā, Sudan": {
+        "lat": 34.067249,
+        "long": -102.524902
+    },
+    "Indianola, Iowa": {
+        "lat": 41.358269,
+        "long": -93.55896
+    },
+    "Indianapolis, Indiana": {
+        "lat": 39.766911,
+        "long": -86.149963
+    },
+    "Paragould, Arkansas": {
+        "lat": 36.056728,
+        "long": -90.487358
+    },
+    "Ballwin, Missouri": {
+        "lat": 38.592979,
+        "long": -90.538788
+    },
+    "Spanish Lake, Missouri": {
+        "lat": 38.795292,
+        "long": -90.213272
+    },
+    "Kirkwood, Missouri": {
+        "lat": 38.580318,
+        "long": -90.406387
+    },
+    "Springfield, Missouri": {
+        "lat": 37.208969,
+        "long": -93.291557
+    },
+    "Miami, Florida": {
+        "lat": 25.728979,
+        "long": -80.237419
+    },
+    "Seattle, Washington": {
+        "lat": 47.603561,
+        "long": -122.329437
+    },
+    "Lake Jackson, Texas": {
+        "lat": 29.03437,
+        "long": -95.446312
+    },
+    "Memphis, Tennessee": {
+        "lat": 35.149761,
+        "long": -90.049248
+    },
+    "Killeen, Texas": {
+        "lat": 31.116831,
+        "long": -97.727112
+    },
+    "Waterloo, Illinois": {
+        "lat": 38.333912,
+        "long": -90.150673
+    },
+    "Tampa, Florida": {
+        "lat": 27.946529,
+        "long": -82.459267
+    },
+    "Shrewsbury, Missouri": {
+        "lat": 38.585411,
+        "long": -90.327873
+    },
+    "Minneapolis, Minnesota": {
+        "lat": 44.979031,
+        "long": -93.264931
+    },
+    "Topeka, Kansas": {
+        "lat": 39.049278,
+        "long": -95.671181
+    },
+    "Washington, District of Columbia": {
+        "lat": 38.890369,
+        "long": -77.03196
+    },
+    "Midpines, California": {
+        "lat": 37.54718,
+        "long": -119.921066
+    },
+    "Fort Lauderdale, Florida": {
+        "lat": 26.123671,
+        "long": -80.143562
+    },
+    "Saint Albans, Missouri": {
+        "lat": 38.576649,
+        "long": -90.75396
+    },
+    "Brooklyn, New York": {
+        "lat": 40.692451,
+        "long": -73.990356
+    },
+    "Murray, Kentucky": {
+        "lat": 36.610229,
+        "long": -88.30204
+    },
+    "Auckland, New Zealand": {
+        "lat": -36.660571,
+        "long": 175.2871371
+    },
+    "Sikeston, Missouri": {
+        "lat": 36.876518,
+        "long": -89.58828
+    },
+    "Pevely, Missouri": {
+        "lat": 38.283989,
+        "long": -90.394852
+    },
+    "Lawrence, Kansas": {
+        "lat": 38.973061,
+        "long": -95.236526
+    },
+    "Kirksville, Missouri": {
+        "lat": 40.19426,
+        "long": -92.571991
+    },
+    "Niskayuna, New York": {
+        "lat": 42.779221,
+        "long": -73.846199
+    },
+    "Pleasanton, California": {
+        "lat": 37.658031,
+        "long": -121.87722
+    },
+    "Saginaw, Michigan": {
+        "lat": 43.419182,
+        "long": -83.946671
+    },
+    "Hershey, Pennsylvania": {
+        "lat": 40.285309,
+        "long": -76.651047
+    },
+    "Overland, Missouri": {
+        "lat": 38.699879,
+        "long": -90.358269
+    },
+    "Pontoon Beach, Illinois": {
+        "lat": 38.745529,
+        "long": -90.072571
+    },
+    "Brookfield, Illinois": {
+        "lat": 41.822842,
+        "long": -87.84111
+    },
+    "Ferguson, Missouri": {
+        "lat": 38.74501,
+        "long": -90.30397
+    },
+    "Bonne Terre, Missouri": {
+        "lat": 37.923092,
+        "long": -90.555161
+    },
+    "Austin, Texas": {
+        "lat": 30.267599,
+        "long": -97.742981
+    },
+    "St-Louis, Saint-Louis, Senegal": {
+        "lat": 16.092226,
+        "long": -14.734033
+    },
+    "Lawrenceville, Illinois": {
+        "lat": 38.72908,
+        "long": -87.68718
+    },
+    "Lodi, California": {
+        "lat": 38.13015,
+        "long": -121.27597
+    },
+    "Corona, California": {
+        "lat": 33.877892,
+        "long": -117.575043
+    },
+    "Dayton, Ohio": {
+        "lat": 39.759109,
+        "long": -84.194443
+    }
+}
