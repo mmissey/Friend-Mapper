@@ -24,16 +24,7 @@ var path = d3.geo.path()
     .projection(projection);
 var zoom = null;
 var tooltip = null;
-//Load the map whenever someone logins in FB
-FB.Event.subscribe('auth.authResponseChange', function(response) {
-    if (response.status === 'connected') {
-        fbLogin(response);
-    } else {
-        $('body').removeClass('loggedin');
-        $('#user').text("your ");
-        console.log('User cancelled login or did not fully authorize.');
-    }
-});
+
 
 
 var fbLogin = function(response) {
