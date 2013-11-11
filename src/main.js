@@ -13,7 +13,7 @@ $(document).ready(function() {
         FB.logout();
     });
     var time = new Date().getTime();
-    $.get('json/cities.json?time='+time).success(function(data) {
+    $.get('http://www.marcmissey.com/friendmapper/json/cities.json?time='+time).success(function(data) {
         cities = data;
     });
 });
@@ -216,7 +216,7 @@ function getCoordinates(city, new_cities) {
 
         waiting -= 1;
         if (waiting === 0) {
-            $.post('cityCoordinates.php', {
+            $.post('http://www.marcmissey.com/friendmapper/cityCoordinates.php', {
                 newCities: new_cities
             });
         }
