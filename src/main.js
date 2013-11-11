@@ -1,7 +1,7 @@
 $(document).ready(function() {
     FB.init({
         appId: '215206295317575', // App ID from the app dashboard
-        channelUrl: 'https://marc.local/fbNetwork', // Channel file for x-domain comms
+        channelUrl: 'https://marc.local/friendmapper', // Channel file for x-domain comms
         status: true, // Check Facebook Login status
         xfbml: true // Look for social plugins on the page
     });
@@ -13,14 +13,13 @@ $(document).ready(function() {
         FB.logout();
     });
     var time = new Date().getTime();
-    $.get('json/cities.json?time='+time).success(function(data) {
+    $.get('json/cities.json?time=' + time).success(function(data) {
         cities = data;
     });
 });
 
-var graph = {};
-var user = {};
 var cities = {};
+var user = {};
 var pathCoords = [];
 var projection = null;
 var arcGroup = null;
@@ -36,7 +35,7 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
         fbLogin(response);
     } else {
         $('body').removeClass('loggedin');
-        $('#user').text("your");
+        $('#user').text("your ");
         console.log('User cancelled login or did not fully authorize.');
     }
 });
@@ -48,38 +47,19 @@ var fbLogin = function(response) {
         console.log('logged in. Getting friends.');
         FB.api('/me', function(response) {
             user = response;
-            $('#user').text(user.name + "'s");
+            $('#user').text(user.name + "'s ");
             getFriends();
         });
     }
 };
 
 var getFriends = function() {
-    FB.api('/me/friends', function(response) {
-        // Construct a mapping of IDs to friends (we might want this later).
-        var friends = response.data.reduce(function(acc, x) {
-            acc[x.id] = x.name;
-            return acc;
-        }, {});
-
-        // Extract the list of friend IDs.
-        var fids = Object.keys(friends);
-
-        // Add some nodes to the graph.
-        graph.nodes = fids.map(function(fid) {
-            return {
-                id: fid,
-                name: friends[fid]
-            }
+    FB.api('/fql?q=' + escape("SELECT name, uid, hometown_location, current_location FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me())"),
+        function(response) {
+            drawMap();
+            mapFriends(response.data);
         });
-        /*escape()*/
-        FB.api('/fql?q=' + escape("SELECT name, uid, hometown_location, current_location FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me())"),
-            function(response) {
-                drawMap();
-                mapFriends(response.data);
-            });
-    });
-};
+}
 
 var lineTransition = function lineTransition(path) {
     path.transition()
@@ -99,45 +79,84 @@ var tweenDash = function tweenDash() {
 };
 
 function mapFriends(data) {
-    var paths = [];
     var total = 0;
     var svg = d3.select('svg');
-    var curr = '';
-    var home = '';
-    var currPoints = null;
-    var homePoints = null;
     var new_cities = {};
+    var cityQueue = 0;
+
     $.each(data, function(index, value) {
-        if (value.current_location && value.hometown_location) {
+        if (value.current_location && value.hometown_location && (value.current_location.name !== value.hometown_location.name) ) {
+            total++;
+            var curr = '';
+            var home = '';
+            var currPoints = 0;
+            var homePoints = 0;
+            var currPromise = true;
+            var homePromise = true;
+
             curr = value.current_location.name;
             home = value.hometown_location.name;
-
             if (!cities[curr]) {
-                cities[curr] = getCoordinates(curr, new_cities); //get lat,long  
+                cities[curr] = "waiting";
+                cityQueue++;
+                currPromise = getCoordinates(curr); //get lat,long
             }
             if (!cities[home]) {
-                cities[home] = getCoordinates(home, new_cities);
-            }
+                cities[home] = "waiting";
+                cityQueue++;
+                homePromise = getCoordinates(home);
 
-            currPoints = projection([cities[curr].long, cities[curr].lat]);
-            homePoints = projection([cities[home].long, cities[home].lat]);
-
-            if (currPoints && homePoints && (curr !== home)) {
-                placePath({ //Creates the circles and path
-                    x1: homePoints[0],
-                    y1: homePoints[1],
-                    x2: currPoints[0],
-                    y2: currPoints[1],
-                    from: home,
-                    to: curr,
-                    name: value.name,
-                    uid: value.uid
-                });
             }
+            $.when(currPromise, homePromise).done(function(a1, a2) {
+                currPoints = projection([cities[curr].long, cities[curr].lat]);
+                homePoints = projection([cities[home].long, cities[home].lat]);
+                if (currPoints && homePoints) {
+                    placePath({ //Creates the circles and path
+                        x1: homePoints[0],
+                        y1: homePoints[1],
+                        x2: currPoints[0],
+                        y2: currPoints[1],
+                        from: home,
+                        to: curr,
+                        name: value.name,
+                        uid: value.uid
+                    });
+                }
+            });
         }
     });
 
-    return cities;
+    $('#pathCount').text(total);
+
+    function getCoordinates(city) {
+        var api_key = "Fmjtd%7Cluubn9612u%2C2x%3Do5-907gq0";
+        var url = "http://www.mapquestapi.com/geocoding/v1/address?key=" + api_key + "&location=" + encodeURIComponent(city);
+        // var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(city) + "&sensor=false";
+        return $.get(url).success(function(rsp) {
+            //MAPQUEST
+            new_cities[city] = cities[city] = {
+                lat: rsp.results[0].locations[0].latLng["lat"],
+                long: rsp.results[0].locations[0].latLng["lng"]
+            }
+            cityQueue--;
+            if(cityQueue === 0 && (Object.keys(new_cities).length > 0)){
+                $.post('cityCoordinates.php', {
+                    newCities: new_cities
+                }).success(function(){
+                    console.log("Thanks for adding " + Object.keys(new_cities).length + " cities!");
+                });
+            }
+            //GOOGLE
+            // if(rsp.status !== "OVER_QUERY_LIMIT"){
+            //     cities[city] = {
+            //         lat: rsp.results[0].geometry.location["lat"],
+            //         long: rsp.results[0].geometry.location["lng"]
+            //     }
+            // }
+        });
+
+    }
+
 }
 
 function placePath(data) {
@@ -188,40 +207,6 @@ function placePath(data) {
         .attr("cy", data.y2)
         .attr("r", 2)
         .style("fill", "red");
-}
-var waiting = 0;
-//Uses Mapquest API to grab lat, long.
-
-function getCoordinates(city, new_cities) {
-    //var api_key = "Fmjtd%7Cluubn9612u%2C2x%3Do5-907gq0";
-    //var url = "http://www.mapquestapi.com/geocoding/v1/address?key=" + api_key + "&location=" + encodeURIComponent(city);
-    var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(city) + "&sensor=false";
-    cities[city] = {
-        lat: 0,
-        long: 0
-    };
-    waiting += 1;
-    $.get(url).success(function(rsp) {
-        //GOOGLE
-        cities[city] = {
-            lat: rsp.results[0].geometry.location["lat"],
-            long: rsp.results[0].geometry.location["lng"]
-        }
-        //MAPQUEST
-        // cities[city] = {
-        //     lat: rsp.results[0].locations[0].latLng["lat"],
-        //     long: rsp.results[0].locations[0].latLng["lng"]
-        // }
-        new_cities[city] = cities[city];
-
-        waiting -= 1;
-        if (waiting === 0) {
-            $.post('cityCoordinates.php', {
-                newCities: new_cities
-            });
-        }
-    });
-    return cities[city];
 }
 
 var drawMap = function() {
@@ -284,7 +269,7 @@ var drawMap = function() {
     function clicked(d) {
         console.log(d);
     }
-
+    
     function zoomed(d) {
         var x, y;
         var diff = [];
