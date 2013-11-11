@@ -12,7 +12,8 @@ $(document).ready(function() {
     $("#fbLogout").on("click", function() {
         FB.logout();
     });
-    $.get('json/cities.json').success(function(data) {
+    var time = new Date().getTime();
+    $.get('json/cities.json?time='+time).success(function(data) {
         cities = data;
     });
 });
