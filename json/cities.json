@@ -646,13 +646,6 @@
     "Lodi, California": {
         "lat": 38.13015,
         "long": -121.27597
-    },
-    "Corona, California": {
-        "lat": 33.877892,
-        "long": -117.575043
-    },
-    "Dayton, Ohio": {
-        "lat": "39.7589478",
-        "long": "-84.1916069"
     }
+    
 }
