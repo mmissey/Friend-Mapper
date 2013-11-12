@@ -27,6 +27,10 @@ body {
     stroke-linecap: round;
     pointer-events: none;
 }
+circle{
+  z-index: 999;
+}
+
 .tooltip {
     border: 1px solid #000000;
     color: #FFFFFF;

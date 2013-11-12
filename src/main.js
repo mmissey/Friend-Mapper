@@ -14,6 +14,13 @@ $(document).ready(function() {
     });
 });
 
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
+
 var user = {};
 var pathCoords = [];
 var projection = null;
@@ -25,7 +32,16 @@ var path = d3.geo.path()
 var zoom = null;
 var tooltip = null;
 
-
+// //Load the map whenever someone logins in FB
+// FB.Event.subscribe('auth.authResponseChange', function(response) {
+//     if (response.status === 'connected') {
+//         fbLogin(response);
+//     } else {
+//         $('body').removeClass('loggedin');
+//         $('#user').text("your");
+//         console.log('User cancelled login or did not fully authorize.');
+//     }
+// });
 
 var fbLogin = function(response) {
     if (response.authResponse ) {
@@ -45,6 +61,10 @@ var getFriends = function() {
             drawMap();
             mapFriends(response.data);
         });
+}
+
+var hidePaths = function(){
+    arcGroup.selectAll("path").style('visibility', 'hidden');
 }
 
 var lineTransition = function lineTransition(path) {
@@ -97,7 +117,10 @@ function mapFriends(data) {
 }
 
 function placePath(data) {
-    var group = arcGroup.append("g")
+    var pathColor = "#333333";
+    var group = arcGroup.append("g").attr({
+            'class': 'path'
+        })
         .data([{
             name: data.name,
             from: data.from,
@@ -105,7 +128,14 @@ function placePath(data) {
             uid: data.uid
         }])
         .on('mouseover', function(d) {
-            d3.selectAll(this.childNodes).attr("r", 5 / scale).style('stroke-width', 3 / scale + 'px');
+            var sel = d3.select(this);
+            sel.moveToFront();
+            sel.selectAll('circle').attr("r", 5 / scale)
+            sel.select('path').style({
+                'stroke-width': 3 / scale + 'px',
+                'stroke': pathColor
+            });
+
             $("#infoPic").css('background-image', 'url(http://graph.facebook.com/' + d.uid + '/picture)')
             $("#name").text(d.name);
             $("#home").text(d.from);
@@ -114,9 +144,14 @@ function placePath(data) {
         }).on("mousemove", function(d) {
             return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
         }).on("mouseout", function(d) {
-            d3.selectAll(this.childNodes).attr("r", 2 / scale).style('stroke-width', 1 / scale + 'px');
+            var sel = d3.select(this);
+            sel.selectAll('circle').attr("r", 2 / scale)
+            sel.select('path').style({
+                'stroke-width': 1 / scale + 'px',
+                'stroke': '#666666'
+            });
             $("#info").hide();
-        });;
+        });
     group.append("path").data([{
         type: "LineString",
         coordinates: [
@@ -133,17 +168,26 @@ function placePath(data) {
             'stroke-width': '1px',
             fill: 'none',
         }).call(lineTransition);
-
+    //Home Location
     group.append("circle")
         .attr("cx", data.x1)
         .attr("cy", data.y1)
         .attr("r", 2)
-        .style("fill", "blue");
+        .style("fill", "#FF0000");
+    //Current Location
     group.append("circle")
         .attr("cx", data.x2)
         .attr("cy", data.y2)
         .attr("r", 2)
-        .style("fill", "red");
+        .style("fill", "#000077");
+}
+
+var cityToColor = function(city){
+    var color = "#";
+    for(var i=0;i<3;i++){
+        color += city.charCodeAt(i)
+    }
+    return color.substring(0,7);
 }
 
 var drawMap = function() {
