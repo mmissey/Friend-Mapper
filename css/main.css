@@ -9,6 +9,9 @@ body {
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333333;
 }
+canvas {
+    display: none;
+}
 .background {
     fill: none;
     pointer-events: all;
@@ -27,10 +30,34 @@ body {
     stroke-linecap: round;
     pointer-events: none;
 }
-circle{
-  z-index: 999;
+#share {
+    position: absolute;
+    right: 15px;
+    display: none;
+    width: 150px;
+    margin: 20px auto;
+    background: #5A73B4;
+    padding: 10px;
 }
-
+.loggedin #share {
+    display: block;
+}
+#fbshare {
+    width: 150px;
+    height: 35px;
+    font-size: 15px;
+    background: #5B74A8;
+    border: 1px solid #29447E;
+    color: #FFFFFF;
+}
+#shareText {
+    width: 150px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+circle {
+    z-index: 999;
+}
 .tooltip {
     border: 1px solid #000000;
     color: #FFFFFF;
@@ -40,47 +67,42 @@ circle{
     padding: 5px;
     visibility: hidden;
 }
-
-#info{
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 25px 2px;
-  border: 1px solid #000000;
-  background: #FFFFFF;
-  padding: 10px;
-  width: 200px;
-  text-align: center;
+#info {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 25px 2px;
+    border: 1px solid #000000;
+    background: #FFFFFF;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
 }
-
-#infoPic{
-  width: 50px;
-  height: 50px;
-  margin: 0 auto;
-  border: 1px solid #000000;
+#infoPic {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    border: 1px solid #000000;
 }
-#loggedOut{
-  display: block;
+#loggedOut {
+    display: block;
 }
-#friends{
-  display: none;
+#friends {
+    display: none;
 }
-.loggedin #loggedOut{
-  display: none;
+.loggedin #loggedOut {
+    display: none;
 }
-
-.loggedin #fbLogin{
-  display: none;
+.loggedin #fbLogin {
+    display: none;
 }
-
-.loggedin #friends{
-  display: block;
+.loggedin #friends {
+    display: block;
 }
-
-#fbLogout{
-  display: none;
+#fbLogout {
+    display: none;
 }
-.loggedin #fbLogout{
-  display: inline-block;
+.loggedin #fbLogout {
+    display: inline-block;
 }

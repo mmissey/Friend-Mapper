@@ -6,18 +6,21 @@ $(document).ready(function() {
         xfbml: true // Look for social plugins on the page
     });
     $("#fbLogin").on("click", function() {
-        FB.login(fbLogin, { perms: 'user_hometown, user_location, friends_hometown, friends_location' });
+        FB.login(fbLogin, {
+            scope: 'user_hometown, user_location, friends_hometown, friends_location, publish_stream'
+        });
 
     });
     $("#fbLogout").on("click", function() {
         FB.logout(null);
     });
+    $('#fbshare').on('click', exportAsImage);
 });
 
 d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
-    this.parentNode.appendChild(this);
-  });
+    return this.each(function() {
+        this.parentNode.appendChild(this);
+    });
 };
 
 
@@ -43,13 +46,26 @@ var tooltip = null;
 //     }
 // });
 
+// This example was created using Protovis & jQuery
+// Base64 provided by http://www.webtoolkit.info/javascript-base64.html
+// Modern web browsers have a builtin function to this as well 'btoa'
+var exportAsImage = function() {
+    var svg = $('svg')[0];
+    zoom.scale(1070).translate([460, 250]).event(d3.select('svg'));
+    var serializer = new XMLSerializer();
+    var str = serializer.serializeToString(svg);
+    var canvas = document.getElementById('svg-canvas');
+    canvg(canvas, str);
+    PostImageToFacebook(user.authToken, $('#shareText').text());
+}
+
 var fbLogin = function(response) {
-    if (response.authResponse ) {
+    if (response.authResponse) {
+        user.authToken = response.authResponse.accessToken;
         $('body').addClass('loggedin');
         console.log('logged in. Getting friends.');
         FB.api('/me', function(response) {
-            user = response;
-            $('#user').text(user.name + "'s ");
+            $('#user').text(response.name + "'s ");
             getFriends();
         });
     }
@@ -63,7 +79,7 @@ var getFriends = function() {
         });
 }
 
-var hidePaths = function(){
+var hidePaths = function() {
     arcGroup.selectAll("path").style('visibility', 'hidden');
 }
 
@@ -94,7 +110,7 @@ function mapFriends(data) {
         var home = value.hometown_location;
         if (value.current_location && value.hometown_location && (value.current_location.name !== value.hometown_location.name)) {
             total++;
-            
+
             var currPoints = projection([curr["longitude"], curr["latitude"]]);
             var homePoints = projection([home["longitude"], home["latitude"]]);
             if (currPoints && homePoints) {
@@ -119,8 +135,8 @@ function mapFriends(data) {
 function placePath(data) {
     var pathColor = "#333333";
     var group = arcGroup.append("g").attr({
-            'class': 'path'
-        })
+        'class': 'path'
+    })
         .data([{
             name: data.name,
             from: data.from,
@@ -182,12 +198,12 @@ function placePath(data) {
         .style("fill", "#000077");
 }
 
-var cityToColor = function(city){
+var cityToColor = function(city) {
     var color = "#";
-    for(var i=0;i<3;i++){
+    for (var i = 0; i < 3; i++) {
         color += city.charCodeAt(i)
     }
-    return color.substring(0,7);
+    return color.substring(0, 7);
 }
 
 var drawMap = function() {
@@ -221,10 +237,10 @@ var drawMap = function() {
 
 
 
-    svg.append("rect")
-        .attr("class", "background")
-        .attr("width", width)
-        .attr("height", height);
+    // svg.append("rect")
+    //     .attr("class", "background")
+    //     .attr("width", width)
+    //     .attr("height", height);
 
 
     d3.json("json/us.json", function(error, us) {
@@ -233,14 +249,21 @@ var drawMap = function() {
             .selectAll("path")
             .data(topojson.feature(us, us.objects.states).features)
             .enter().append("path")
-            .attr("d", path)
+            .attr({
+                "d": path,
+                "fill": "#AAAAAA"
+            });
 
         g.append("path")
             .datum(topojson.mesh(us, us.objects.states, function(a, b) {
                 return a !== b;
             }))
             .attr("id", "state-borders")
-            .attr("d", path);
+            .attr({
+                "d": path,
+                "fill": "#AAAAAA",
+                "stroke": "#FFFFFF"
+            });
     });
 
     var g = svg.append("g").on("click", clicked).call(zoom);
@@ -248,7 +271,7 @@ var drawMap = function() {
     points = svg.append("g");
 
     function clicked(d) {
-        console.log(d);
+        // zoom.scale(1070).translate([460,250]).event(d3.select('svg'));
     }
 
     function zoomed(d) {
@@ -265,3 +288,55 @@ var drawMap = function() {
         g.selectAll("path").attr("d", path);
     }
 }
+
+
+    function PostImageToFacebook(authToken, msg) {
+        var canvas = document.getElementById("svg-canvas");
+        var imageData = canvas.toDataURL("image/png");
+        try {
+            blob = dataURItoBlob(imageData);
+        } catch (e) {
+            console.log(e);
+        }
+        var fd = new FormData();
+        fd.append("access_token", authToken);
+        fd.append("source", blob);
+        fd.append("message", msg);
+        try {
+
+            $.ajax({
+                url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
+                type: "POST",
+                data: fd,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function(data) {
+                    console.log("success " + data);
+                },
+                error: function(shr, status, data) {
+                    console.log("error " + data + " Status " + shr.status);
+                    alert("Couldn't share the image. Probably because you didn't give the right permissions");
+                },
+                complete: function() {
+                    console.log("Posted to facebook");
+                    $('#fbshare').text("Image Shared!").css('pointer-events', 'none');
+                }
+            });
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], {
+            type: 'image/png'
+        });
+    }
