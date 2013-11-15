@@ -15,6 +15,9 @@ $(document).ready(function() {
         FB.logout(null);
     });
     $('#fbshare').on('click', exportAsImage);
+    $('.closer').on("click", function(ev){
+        $(this).parent().hide();
+    });
 });
 
 d3.selection.prototype.moveToFront = function() {

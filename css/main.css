@@ -32,28 +32,29 @@ canvas {
 }
 #share {
     position: absolute;
-    right: 15px;
+    bottom: 0;
+    left: 0;
     display: none;
     width: 150px;
-    margin: 20px auto;
     background: #5A73B4;
     padding: 10px;
 }
 .loggedin #share {
     display: block;
 }
-#fbshare {
-    width: 150px;
-    height: 35px;
-    font-size: 15px;
-    background: #5B74A8;
-    border: 1px solid #29447E;
-    color: #FFFFFF;
-}
+
 #shareText {
     width: 150px;
     height: 60px;
     margin-bottom: 10px;
+    margin-top: -10px;
+}
+.closer {
+    color: #FFFFFF;
+    position: relative;
+    right: -75px;
+    top: -10px;
+    cursor: pointer;
 }
 circle {
     z-index: 999;
@@ -85,6 +86,17 @@ circle {
     margin: 0 auto;
     border: 1px solid #000000;
 }
+.btnFacebook{
+    width: 150px;
+    height: 35px;
+    font-size: 15px;
+    background: #5B74A8;
+    border: 1px solid #29447E;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+
 #loggedOut {
     display: block;
 }
